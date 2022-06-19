@@ -41,5 +41,38 @@ If ELEMENTS is added, it is added at the beginning of the list."
   (cl-assert (listp elements))
   (--map (add-to-list list-var it append compare-fn) elements))
 
+
+(defvar yk/compress-file-suffixes
+    '(("\\.tar\\.gz\\'"  "gzip -dc %i | tar -xf -")
+      ("\\.tar\\.xz\\'"  "xz -dc %i | tar -xf -")
+      ("\\.tgz\\'"  "gzip -dc %i | tar -xf -")
+      ("\\.gz\\'"  "gunzip")
+      ("\\.lz\\'"  "lzip -d")
+      ("\\.Z\\'"  "uncompress")
+      ("\\.z\\'"  "gunzip")
+      ("\\.dz\\'"  "dictunzip")
+      ("\\.tbz\\'" ".tar" "bunzip2")
+      ("\\.bz2\\'"  "bunzip2")
+      ("\\.xz\\'"  "unxz")
+      ("\\.zip\\'"  "unzip -o -d %o %i")
+      ("\\.tar\\.zst\\'" "unzstd -c %i | tar -xf -")
+      ("\\.tzst\\'" "unzstd -c %i | tar -xf -")
+      ("\\.zst\\'" "unzstd --rm")
+      ("\\.7z\\'" "7z x -aoa -o%o %i")))
+
+;; (defun yk/uncompress-file (file &optional output-directory)
+;;   ""
+;;   (let (suffix newname
+;;         (suffixes yk/compress-file-suffixes))
+;;     (while suffixes
+;;       (if (string-match (car car suffixes) file)
+;;           (setq suffix (car suffixes) suffixes nil)
+;;         (setq suffixes (cdr suffixes))))
+;;     (if suffix
+;;         (setq newname (concat ))))
+;;   )
+
+
+
 (provide 'yk-util)
 ;;; yk-util.el ends here
