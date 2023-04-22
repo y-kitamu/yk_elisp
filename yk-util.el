@@ -46,7 +46,6 @@ If ELEMENTS is added, it is added at the beginning of the list."
     (let ((lines (with-temp-buffer
                    (insert-file-contents file)
                    (split-string (buffer-string) "\\\n"))))
-      (message lines)
       (-map (lambda (line)
               (when (string-match "export \\(.*\\)=\\(.*\\)" line)
                 (let ((var (match-string 1 line))
