@@ -51,7 +51,8 @@ If ELEMENTS is added, it is added at the beginning of the list."
                 (let ((var (match-string 1 line))
                       (val (match-string 2 line)))
                   (setenv var val)
-                  (message "Set environment variable %s to %s" var val))))
+                  ;; (message "Set environment variable %s to %s" var val)
+                  )))
             lines)))
 
 
