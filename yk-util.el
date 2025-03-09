@@ -86,6 +86,19 @@ If ELEMENTS is added, it is added at the beginning of the list."
 ;;         (setq newname (concat ))))
 ;;   )
 
+(defun yk/org-export-to-markdown (filepath)
+  "Convert the content of current buffer to markdown format and save to FILEPATH."
+  (let ((content (buffer-string)))
+    (with-temp-buffer
+      (insert content)
+      (org-mode)
+      (org-md-export-as-markdown)
+      )
+    (with-current-buffer "*Org MD Export*"
+      (write-file filepath)
+      (kill-buffer))
+    ))
+
 
 
 (provide 'yk-util)
